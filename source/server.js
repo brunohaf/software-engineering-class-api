@@ -4,7 +4,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const package_info = require('../package.json');
 const controllers = require('./Controllers');
 //const body_parser = require('body-parser');
-require('dotenv');
+require('dotenv').config();
 
 // Starting API service
 const app = express();
@@ -30,4 +30,4 @@ const options = {
 const specs = swaggerJSDoc(options);
 app.use('/', swagger_ui.serve, swagger_ui.setup(specs));
 
-app.listen(3000);
+app.listen(8000);

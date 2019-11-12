@@ -1,13 +1,13 @@
-const CarService = require('../Services/CarService');
+const RentalStoreService = require('../Services/RentalStoreService');
 const router = require('express').Router();
 
 
 /**
  *  @swagger
- * /GetCarById:
+ * /GetRentalStoreById:
  *   get:
  *     tags:
- *     - "Car"
+ *     - "RentalStore"
  *     summary: "Add a new bot Configurations"
  *     description: "Add a new bot Configurations"
  *     parameters:
@@ -26,15 +26,15 @@ const router = require('express').Router();
  *         description: "Ops... something wrong happened"
  */
 router.get('/', async (req, res) => {
-    return await CarService.GetCarById(req, res);
+    return await RentalStoreService.GetRentalStoreById(req, res);
 })
 
 /**
  *  @swagger
- * /GetCars:
+ * /GetRentalStores:
  *   get:
  *     tags:
- *     - "Car"
+ *     - "RentalStore"
  *     summary: "Add a new bot Configurations"
  *     description: "Add a new bot Configurations"
  *     responses:
@@ -48,15 +48,15 @@ router.get('/', async (req, res) => {
  *         description: "Ops... something wrong happened"
  */
 router.get('/', async (req, res) => {
-    return res.json(CarService.GetCars(req, res));
+    return await RentalStoreService.GetRentalStores(req, res);
 })
 
 /**
  *  @swagger
- * /SaveCar:
+ * /SaveRentalStore:
  *   post:
  *     tags:
- *     - "Car"
+ *     - "RentalStore"
  *     summary: "Add a new bot Configurations"
  *     description: "Add a new bot Configurations"
  *     parameters:
@@ -82,15 +82,15 @@ router.get('/', async (req, res) => {
  *         description: "Ops... something wrong happened"
  */
 router.post('/', async (req, res) => {
-    return await CarService.SaveCar(req, res);
+    return await RentalStoreService.SaveRentalStore(req, res);
 })
 
 /**
  *  @swagger
- * /UpdateCar:
+ * /UpdateRentalStore:
  *   put:
  *     tags:
- *     - "Car"
+ *     - "RentalStore"
  *     summary: "Add a new bot Configurations"
  *     description: "Add a new bot Configurations"
  *     parameters:
@@ -114,15 +114,15 @@ router.post('/', async (req, res) => {
  *         description: "Ops... something wrong happened"
  */
 router.put('/', async (req, res) => {
-    return await CarService.UpdateCar(req, res);
+    return await RentalStoreService.UpdateRentalStore(req, res);
 })
 
 /**
  *  @swagger
- * /DeleteCar:
+ * /DeleteRentalStore:
  *   delete:
  *     tags:
- *     - "Car"
+ *     - "RentalStore"
  *     summary: "Add a new bot Configurations"
  *     description: "Add a new bot Configurations"
  *     parameters:
@@ -141,7 +141,7 @@ router.put('/', async (req, res) => {
  *         description: "Ops... something wrong happened"
  */
 router.delete('/', async (req, res) => {
-    return await CarService.DeleteCar(req, res);
+    return await RentalStoreService.DeleteRentalStore(req, res);
 })
 
 
