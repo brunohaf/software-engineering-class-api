@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./user')
+const CarModel = require('./car')
 
 const sequelize = new Sequelize('essgdb', 'essgdb', 'Hl88m0gOX-?n', {
   host: 'den1.mysql3.gear.host',
@@ -13,7 +14,9 @@ const sequelize = new Sequelize('essgdb', 'essgdb', 'Hl88m0gOX-?n', {
 })
 
 const User = UserModel(sequelize, Sequelize)
+const Car = CarModel(sequelize, Sequelize)
 
 module.exports = {
-  User
+  User,
+  Car
 }
