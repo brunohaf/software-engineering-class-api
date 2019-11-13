@@ -107,7 +107,6 @@ router.put('/', async (req, res) => {
  */
 router.get('/', async (req, res) => {
     car_service.GetAllCars(res);
-    console.log("ao controller aí gente")
 
     return 200;
 });
