@@ -1,7 +1,7 @@
 const { User } = require('../models/sequelize')
 
 const SaveUser = (req, res) => {
-    return User.create({ name: 'test' });
+    return res.json(User.create({ name: req }));
 };
 
 module.exports = { SaveUser };
