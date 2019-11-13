@@ -2,49 +2,38 @@ const { Car } = require('../models/sequelize')
 const { CarReserve } = require('../models/sequelize')
 const Op = require('Sequelize').Op
 
-const CarRentByPeriod = async (dataInicio, dataFim, idcarro, res) => {
+const CarRentByPeriod = async (dataInicio, dataFim, res) => {
 
- /*   const mysqldataInicio = new Date(dataInicio).toLocaleString();
-    const mysqldataFim = new Date(dataFim);
+    const mysqldataInicio = new Date(dataInicio).toISOString().split("T")[0];
+    const mysqldataFim = new Date(dataFim).toISOString().split("T")[0];
 
-    var condition = 
-{ 
-  [Op.or]: [ 
-   { 
-    dt_inicio_reserva: {
-      [Op.gte]: mysqldataInicio
-      },
-    },
-   { 
-    dt_fim_reserva: {
-      [Op.lte]: mysqldataFim
-      }
-   }
- ]
-}
+    Car.belongsTo(CarReserve, { foreignKey: 'idcarro' });
+    CarReserve.hasMany(Car, { foreignKey: 'idcarro' });
 
-    CarReserve.belongsTo(Car, {foreignKey: 'idcarro'});
-    Car.hasMany(CarReserve, {foreignKey: 'idcarro'});
-
-    const cars = await Car.findAll({
+    const cars = await CarReserve.findAll({
         include: [{
-            model: CarReserve,
+            model: Car,
             required: true, // do an INNER Join 
         }],
-        where: [{
-            "dt_inicio_reserva": {
-                $between: [mysqldataInicio, mysqldataFim]
-            },
-        },
-        {
-            "dt_fim_reserva": {
-                $between: [mysqldataInicio, mysqldataFim]
-            }
+        where: {
+            [Op.and]:
+            [
+                {
+                    dt_inicio_reserva: {
+                        [Op.gte]: [mysqldataInicio]
+                    }
+                },
+                {
+                    dt_fim_reserva: {
+                        [Op.lte]: [mysqldataFim]
+                    }
+                }
+            ]
         }
-    ]});
-
-    return res.json(cars);*/
-    return '';
-};
-
-module.exports = { CarRentByPeriod };
+    }).then(c => {
+        return res.status(200).json(c);
+    }).catch(error => {
+        return res.status(400).send("Fetching has failed :" + error);
+    });
+}
+    module.exports = { CarRentByPeriod };
