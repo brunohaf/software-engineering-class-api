@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
+//Usability EndPoints
 router.use('/CarRentByPeriod', require('./user-controller'));
+router.use('/CarFreeForRentByPeriod', require('./user-controller'));
 
 //Car CRUD EndPoints
 router.use('/SaveCar', require('./car-controller'));

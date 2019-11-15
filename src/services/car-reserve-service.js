@@ -5,8 +5,8 @@ const SaveCarReserve = (req, res) => {
                             idcliente : req.idcliente,
                             idcarro : req.idcarro,
                             idlocadora : req.idlocadora,
-                            dt_inicio_reserva : new Date(req.dt_inicio_reserva).toLocaleString(),
-                            dt_fim_reserva : new Date(req.dt_fim_reserva).toLocaleString(),
+                            dt_inicio_reserva : new Date(req.dt_inicio_reserva).toISOString(),
+                            dt_fim_reserva : new Date(req.dt_fim_reserva).toISOString(),
                             reservado : req.reservado ? 1 : 0,
                             cidade : req.cidade
                 }).then( response =>{
@@ -14,14 +14,14 @@ const SaveCarReserve = (req, res) => {
                 }).catch( error => {
                     return res.status( 400 ).send( "Saving has failed: \t" + error)
                 });
-};
+}
 
 const UpdateCarReserve = (req, res) => {
     CarReserve.update( {    idcliente : req.idcliente,
                             idlocadora : req.idlocadora,
                             idcarro : req.idcarro,
-                            dt_inicio_reserva : new Date(req.dt_inicio_reserva).toLocaleString(),
-                            dt_fim_reserva : new Date(req.dt_fim_reserva).toLocaleString(),                    
+                            dt_inicio_reserva : req.dt_inicio_reserva,
+                            dt_fim_reserva : req.dt_fim_reserva,                    
                             reservado : req.reservado,
                             cidade : req.cidade
                 },
@@ -32,7 +32,7 @@ const UpdateCarReserve = (req, res) => {
                 }).catch( error => {
                     return res.status( 400 ).send( "Update has an error: \t" + error )
                 });;
-};
+}
 
 const GetCarReserveById = async (req,res) => {
 

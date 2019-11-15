@@ -137,7 +137,7 @@ router.get('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/byId', async (req, res) => {
-    return  car_reserve_service.GetCarReserveById(req.header('idreserva_carro'),res);
+    return car_reserve_service.GetCarReserveById(req.header('idreserva_carro'),res);
 });
 
 /**
