@@ -40,9 +40,7 @@ const router = require('express').Router();
  *         description: "Ops... something REALLY wrong happened"
  */
 router.post('/', async (req, res) => {
-    car_service.SaveCar(req.body,res);
-
-    return 200;
+    return car_service.SaveCar(req.body,res);
 });
 
 /**
@@ -84,9 +82,7 @@ router.post('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.put('/', async (req, res) => {
-    car_service.UpdateCar(req.body,res);
-
-    return 200;
+    return car_service.UpdateCar(req.body,res);
 });
 
 /**
@@ -106,9 +102,7 @@ router.put('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/', async (req, res) => {
-    car_service.GetAllCars(res);
-
-    return 200;
+    return car_service.GetAllCars(res);
 });
 
 /**
@@ -133,9 +127,7 @@ router.get('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/byId', async (req, res) => {
-    car_service.GetCarById(req.header('idcarro'),res);
-
-    return 200;
+    return car_service.GetCarById(req.header('idcarro'),res);
 });
 
 /**
@@ -160,9 +152,7 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    car_service.DeleteCar(req.header('idcarro'),res);
-
-    return 200;
+    return car_service.DeleteCar(req.header('idcarro'),res);
 });
 
 module.exports = router;

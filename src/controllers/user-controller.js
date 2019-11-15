@@ -27,9 +27,7 @@ const router = require('express').Router();
  *         description: "Ops... something wrong happened"
  */
 router.get('/', async (req, res) => {
-    user_service.CarRentByPeriod(req.header('dataInicio', Date),req.header('dataFim', Date), res);
-
-    return 200;
+    return user_service.CarRentByPeriod(req.header('dataInicio', Date),req.header('dataFim', Date), res);
 })
 
 module.exports = router;

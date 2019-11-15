@@ -33,9 +33,7 @@ const router = require('express').Router();
  *         description: "Ops... something REALLY wrong happened"
  */
 router.post('/', async (req, res) => {
-    rental_company_service.SaveRentalCompany(req.body,res);
-
-    return 200;
+    return rental_company_service.SaveRentalCompany(req.body,res);
 });
 
 /**
@@ -70,9 +68,7 @@ router.post('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.put('/', async (req, res) => {
-    rental_company_service.UpdateRentalCompany(req.body,res);
-
-    return 200;
+    return rental_company_service.UpdateRentalCompany(req.body,res);
 });
 
 /**
@@ -92,9 +88,7 @@ router.put('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/', async (req, res) => {
-    rental_company_service.GetAllRentalCompanys(res);
-
-    return 200;
+    return  rental_company_service.GetAllRentalCompanys(res);
 });
 
 /**
@@ -119,9 +113,7 @@ router.get('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/byId', async (req, res) => {
-    rental_company_service.GetRentalCompanyById(req.header('idlocadora'),res);
-
-    return 200;
+    return rental_company_service.GetRentalCompanyById(req.header('idlocadora'),res);
 });
 
 /**
@@ -146,9 +138,7 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    rental_company_service.DeleteRentalCompany(req.header('idlocadora'),res);
-
-    return 200;
+    return rental_company_service.DeleteRentalCompany(req.header('idlocadora'),res);
 });
 
 module.exports = router;
