@@ -12,14 +12,12 @@ const router = require('express').Router();
  *     parameters:
  *     - in: "header"
  *       name: "dataInicio"
- *       type: "string"
- *       format: date
+ *       type: Date
  *       description: ""
  *       required: false
  *     - in: "header"
  *       name: "dataFim"
- *       type: "string"
- *       format: date
+ *       type: Date
  *       description: ""
  *       required: false
  *     responses:
@@ -29,7 +27,7 @@ const router = require('express').Router();
  *         description: "Ops... something wrong happened"
  */
 router.get('/', async (req, res) => {
-    user_service.CarRentByPeriod(req.header('dataInicio'),req.header('dataFim'), res);
+    user_service.CarRentByPeriod(req.header('dataInicio', Date),req.header('dataFim', Date), res);
 
     return 200;
 })

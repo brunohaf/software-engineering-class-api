@@ -4,36 +4,37 @@ const Op = require('Sequelize').Op
 
 const CarRentByPeriod = async (dataInicio, dataFim, res) => {
 
-    const mysqldataInicio = new Date(dataInicio).toISOString().split("T")[0];
-    const mysqldataFim = new Date(dataFim).toISOString().split("T")[0];
+    const dateCondition =
+    {
+        [Op.and]: [
+            {
+                'dt_inicio_reserva': {
+                    [Op.gte]: dataInicio
+                },
+            },
+            {
+                'dt_fim_reserva': {
+                    [Op.lte]: dataFim
+                }
+            }
+        ]
+    }
 
-    Car.belongsTo(CarReserve, { foreignKey: 'idcarro' });
-    CarReserve.hasMany(Car, { foreignKey: 'idcarro' });
+    CarReserve.belongsTo(Car, { foreignKey: 'idcarro' });
+    Car.hasMany(CarReserve, { foreignKey: 'idcarro' }, { targetKey: 'idcarro' } );
 
     const cars = await CarReserve.findAll({
         include: [{
             model: Car,
             required: true, // do an INNER Join 
         }],
-        where: {
-            [Op.and]:
-            [
-                {
-                    dt_inicio_reserva: {
-                        [Op.gte]: [mysqldataInicio]
-                    }
-                },
-                {
-                    dt_fim_reserva: {
-                        [Op.lte]: [mysqldataFim]
-                    }
-                }
-            ]
-        }
-    }).then(c => {
-        return res.status(200).json(c);
-    }).catch(error => {
-        return res.status(400).send("Fetching has failed :" + error);
+        where: [dateCondition]
+    }).then( response =>{
+        return res.status( 200 ).json(response.map(c => c.carro));
+    }).catch( error => {
+        return res.status( 400 ).send( "Fetching has failed: \t" + error)
     });
-}
+};
     module.exports = { CarRentByPeriod };
+
+    
