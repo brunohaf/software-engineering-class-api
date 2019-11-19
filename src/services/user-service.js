@@ -1,6 +1,6 @@
 const { Car } = require('../models/sequelize')
 const { CarReserve } = require('../models/sequelize')
-const Op = require('Sequelize').Op
+const Op = require('sequelize').Op
 
 const CarRentByPeriod = async (dataInicio, dataFim, res) => {
     const dateCondition =
