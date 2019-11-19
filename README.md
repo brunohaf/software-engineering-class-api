@@ -24,7 +24,7 @@
 
 ### Execute the following commands:
 - `npm init`
-- `heroku create` 
+- `heroku create <app-subdomain>` 
 Save the app name given in the console message:<br>
 `Creating app... done, <app-name-666>`<br>
 `https://<app-name-666>.herokuapp.com/ | https://git.heroku.com/<app-name-666>.git`
