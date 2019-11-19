@@ -15,3 +15,29 @@
 - `yarn start`
 
 - Access Swagger documentation through [localhost:3000](http://localhost:3000).
+
+# How-to publish:
+
+- Create a [heroku](https://id.heroku.com/login) account.
+- Download and install [Heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+- Clone this repository.
+
+### Execute the following commands:
+- `npm init`
+- `heroku create` 
+Save the app name given in the console message:<br>
+`Creating app... done, <app-name-666>`<br>
+`https://<app-name-666>.herokuapp.com/ | https://git.heroku.com/<app-name-666>.git`
+
+#### Then
+
+- `heroku git:remote -a <app-name-666>`
+
+- Rename your remote using:
+- `git remote rename heroku <remoteName>`
+
+- Publish your app with:
+- `git push <remoteName> master`
+
+
+
