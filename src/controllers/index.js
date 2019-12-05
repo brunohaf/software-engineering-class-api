@@ -22,7 +22,14 @@ router.use('/DeleteCarReserve', require('./car-reserve-controller'));
 router.use('/SaveRentalCompany', require('./rental-company-controller'));
 router.use('/UpdateRentalCompany', require('./rental-company-controller'));
 router.use('/GetRentalCompany', require('./rental-company-controller'));
-router.use('/GetAllRentalCompanys', require('./rental-company-controller'));
+router.use('/GetAllRentalCompanies', require('./rental-company-controller'));
 router.use('/DeleteRentalCompany', require('./rental-company-controller'));
+
+//Client CRUD EndPoints
+router.use('/SaveClient', require('./client-controller'));
+router.use('/UpdateClient', require('./client-controller'));
+router.use('/GetClient', require('./client-controller'));
+router.use('/GetAllClients', require('./client-controller'));
+router.use('/DeleteClient', require('./client-controller'));
 
 module.exports = router;

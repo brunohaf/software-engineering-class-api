@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./user')
+const ClientModel = require('./client')
 const CarModel = require('./car')
 const CarReserveModel = require('./car-reserve')
 const RentalCompanyModel = require('./rental-company')
@@ -17,11 +18,13 @@ const sequelize = new Sequelize('essgdb', 'essgdb', 'Hl88m0gOX-?n', {
 
 const User = UserModel(sequelize, Sequelize);
 const Car = CarModel(sequelize, Sequelize);
+const Client = ClientModel(sequelize, Sequelize);
 const CarReserve = CarReserveModel(sequelize, Sequelize);
 const RentalCompany = RentalCompanyModel(sequelize, Sequelize);
 
 module.exports = {
   User,
+  Client,
   Car,
   CarReserve,
   RentalCompany

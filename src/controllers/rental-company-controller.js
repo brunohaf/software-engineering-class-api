@@ -73,7 +73,7 @@ router.put('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetAllRentalCompanys:
+ * /GetAllRentalCompanies:
  *   get:
  *     tags:
  *     - "RentalCompany"
@@ -88,7 +88,7 @@ router.put('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/', async (req, res) => {
-    return  rental_company_service.GetAllRentalCompanys(res);
+    return  rental_company_service.GetAllRentalCompanies(res);
 });
 
 /**
