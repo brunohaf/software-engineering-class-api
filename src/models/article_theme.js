@@ -1,16 +1,14 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('locadora', {
-        idlocadora: {
+    return sequelize.define('article_theme_web', {
+        id_theme: {
           type: type.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
-        nm_locadora: type.STRING,
-        cnpj: type.INTEGER,
-        endereco: type.STRING
+        name: type.STRING,
+        description: type.STRING
         },
         {
             timestamps: false
         }
-        
 )};

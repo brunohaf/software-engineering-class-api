@@ -1,15 +1,15 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('cliente', {
-        idcliente: {
+    return sequelize.define('article_comment_web', {
+        id_comment: {
           type: type.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
-        nm_cliente: type.STRING,
-        cpf: type.STRING
+        id_user: type.INTEGER,
+        id_article: type.INTEGER,
+        content: type.STRING
         },
         {
             timestamps: false
         }
-        
 )};

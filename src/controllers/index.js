@@ -1,35 +1,38 @@
 const router = require('express').Router();
 
 //Usability EndPoints
-router.use('/CarRentByPeriod', require('./user-controller'));
-router.use('/CarFreeForRentByPeriod', require('./user-controller'));
+router.use('/GetTrendingArticles', require('./article-operations-controller'));
+router.use('/GetTopFiveArticles', require('./article-operations-controller'));
+router.use('/GetArticlesByTheme', require('./article-operations-controller'));
+router.use('/GetAllCommentsByArticleId', require('./article-operations-controller'));
 
-//Car CRUD EndPoints
-router.use('/SaveCar', require('./car-controller'));
-router.use('/UpdateCar', require('./car-controller'));
-router.use('/GetCar', require('./car-controller'));
-router.use('/GetAllCars', require('./car-controller'));
-router.use('/DeleteCar', require('./car-controller'));
+//Article CRUD EndPoints
+router.use('/SaveArticle', require('./article-controller'));
+router.use('/UpdateArticle', require('./article-controller'));
+router.use('/GetArticle', require('./article-controller'));
+router.use('/GetAllArticles', require('./article-controller'));
+router.use('/DeleteArticle', require('./article-controller'));
 
-//CarReserve CRUD EndPoints
-router.use('/SaveCarReserve', require('./car-reserve-controller'));
-router.use('/UpdateCarReserve', require('./car-reserve-controller'));
-router.use('/GetCarReserve', require('./car-reserve-controller'));
-router.use('/GetAllCarReserves', require('./car-reserve-controller'));
-router.use('/DeleteCarReserve', require('./car-reserve-controller'));
+//ArticleTheme CRUD EndPoints
+router.use('/SaveArticleTheme', require('./article-theme-controller'));
+router.use('/UpdateArticleTheme', require('./article-theme-controller'));
+router.use('/GetArticleTheme', require('./article-theme-controller'));
+router.use('/GetAllArticleThemes', require('./article-theme-controller'));
+router.use('/DeleteArticleTheme', require('./article-theme-controller'));
 
-//RentalCompany CRUD EndPoints
-router.use('/SaveRentalCompany', require('./rental-company-controller'));
-router.use('/UpdateRentalCompany', require('./rental-company-controller'));
-router.use('/GetRentalCompany', require('./rental-company-controller'));
-router.use('/GetAllRentalCompanies', require('./rental-company-controller'));
-router.use('/DeleteRentalCompany', require('./rental-company-controller'));
+//ArticleComment CRUD EndPoints
+router.use('/SaveArticleComment', require('./article-comment-controller'));
+router.use('/UpdateArticleComment', require('./article-comment-controller'));
+router.use('/GetArticleComment', require('./article-comment-controller'));
+router.use('/GetAllRentalCompanies', require('./article-comment-controller'));
+router.use('/DeleteArticleComment', require('./article-comment-controller'));
 
-//Client CRUD EndPoints
-router.use('/SaveClient', require('./client-controller'));
-router.use('/UpdateClient', require('./client-controller'));
-router.use('/GetClient', require('./client-controller'));
-router.use('/GetAllClients', require('./client-controller'));
-router.use('/DeleteClient', require('./client-controller'));
+//User CRUD EndPoints
+router.use('/SaveUser', require('./user-controller'));
+router.use('/UpdateUser', require('./user-controller'));
+router.use('/GetUser', require('./user-controller'));
+router.use('/GetAllUsers', require('./user-controller'));
+router.use('/DeleteUser', require('./user-controller'));
+router.use('/Login', require('./user-controller'));
 
 module.exports = router;
