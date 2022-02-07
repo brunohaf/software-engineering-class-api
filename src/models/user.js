@@ -6,5 +6,8 @@ module.exports = (sequelize, type) => {
         },
         name: type.STRING,
         password:type.STRING
-    })
+    },
+        {
+            timestamps: false
+        })
 }

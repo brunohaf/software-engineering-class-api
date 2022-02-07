@@ -28,11 +28,13 @@ router.use('/GetAllRentalCompanies', require('./article-comment-controller'));
 router.use('/DeleteArticleComment', require('./article-comment-controller'));
 
 //User CRUD EndPoints
-router.use('/SaveUser', require('./user-controller'));
-router.use('/UpdateUser', require('./user-controller'));
-router.use('/GetUser', require('./user-controller'));
-router.use('/GetAllUsers', require('./user-controller'));
-router.use('/DeleteUser', require('./user-controller'));
-router.use('/Login', require('./user-controller'));
+router.use('/user', require('./user-controller'));
+//router.use('/UpdateUser', require('./user-controller'));
+//router.use('/GetUser', require('./user-controller'));
+//router.use('/GetAllUsers', require('./user-controller'));
+//router.use('/DeleteUser', require('./user-controller'));
+router.use('/user/id', require('./user-controller'));
+router.use('/user/login', require('./user-controller'));
+router.use('/users', require('./user-controller'));
 
 module.exports = router;

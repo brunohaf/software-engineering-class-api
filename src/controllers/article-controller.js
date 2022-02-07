@@ -29,9 +29,9 @@ const router = require('express').Router();
   *           publish_date:
  *              type: "date"
  *           update_date:
- *              type: "date".
+ *              type: "date"
  *           comment_count:
- *              type: "integer".
+ *              type: "integer"
  *     responses:
  *       200:
  *         description: "Article added Successfully"
@@ -73,9 +73,9 @@ router.post('/', async (req, res) => {
  *           publish_date:
  *              type: "date"
  *           update_date:
- *              type: "date".
+ *              type: "date"
  *           comment_count:
- *              type: "integer".
+ *              type: "integer"
  *     responses:
  *       200:
  *         description: "Article updated Successfully"

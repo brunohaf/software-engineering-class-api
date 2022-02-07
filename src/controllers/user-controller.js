@@ -1,9 +1,9 @@
-const user_service = require('../services/user-service');
+const user_service = require('../services/user-services');
 const router = require('express').Router();
 
 /**
  *  @swagger
- * /SaveUser:
+ *   /user:
  *   post:
  *     tags:
  *     - "User"
@@ -17,7 +17,7 @@ const router = require('express').Router();
  *       schema:
  *         type: "user_web"
  *         properties:
- *           id_user:
+ *           login_email:
  *              type: "string"
  *           password:
  *              type: "string"
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 
 /**
  *  @swagger
- * /UpdateUser:
+ *   /user:
  *   put:
  *     tags:
  *     - "User"
@@ -73,7 +73,7 @@ router.put('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetAllUsers:
+ * /users:
  *   get:
  *     tags:
  *     - "User"
@@ -93,15 +93,15 @@ router.get('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetUser/byId:
+ * /user/id:
  *   get:
  *     tags:
  *     - "User"
  *     summary: "Find a User on the database"
  *     description: "Find a User on the database"
  *     parameters:
-*     - in: "header"
- *       name: "id"
+*     - in: "query"
+ *       name: "id_user"
  *       description: "'id' is obligatory to update a User"
  *       required: true
  *     responses:
@@ -112,21 +112,21 @@ router.get('/', async (req, res) => {
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
-router.get('/byId', async (req, res) => {
-    return user_service.GetUserById(req.header('id'),res);
+router.get('/id', async (req, res) => {
+    return user_service.GetUserById(req.query.id_user,res);
 });
 
 /**
  *  @swagger
- * /DeleteUser:
+ *   /user:
  *   delete:
  *     tags:
  *     - "User"
  *     summary: "Erase a User from the database"
  *     description: "Erase a User on the database"
  *     parameters:
-*     - in: "header"
- *       name: "id"
+*     - in: "query"
+ *       name: "id_user"
  *       description: "'id' is obligatory to erase a User"
  *       required: true
  *     responses:
@@ -138,40 +138,41 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    return user_service.DeleteUser(req.header('id'),res);
+    return user_service.DeleteUser(req.query.id_user,res);
 });
 
 /**
  *  @swagger
- * /Login:
+ * /user/login:
  *   post:
  *     tags:
  *     - "User"
- *     summary: "Login a User"
- *     description: "Login a User"
+ *     summary: "Authenticate a user"
+ *     description: "Authenticate a user"
  *     parameters:
+*     - in: "body"
  *       name: "body"
  *       description: "A User must have all the properties"
  *       required: false
  *       schema:
  *         type: "user_web"
  *         properties:
- *           id_user:
+ *           login:
  *              type: "string"
  *           password:
  *              type: "string"
- *           name:
- *              type: "string"
  *     responses:
  *       200:
- *         description: "The User is now gone!"
+ *         description: "User added Successfully"
+ *       304:
+ *         description: "User already added"
  *       401:
- *         description: "Wrong User's 'id'"
+ *         description: "Wrong User properties"
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
-router.post('/', async (req, res) => {
-    return user_service.Login(req,res);
+router.post('/login', async (req, res) => {
+    return user_service.Login(req.body,res);
 });
 
 module.exports = router;

@@ -12,7 +12,7 @@ const GetTrendingArticles = async (req, res) => {
 
 const FilterTrendingArticles = (articles, trendCount) => {
     articles.sort((a,b) => {
-        return new Date(b.publish_date) - new Date(a.publish_date);
+        return new Date(b.createdAt) - new Date(a.createdAt);
       })    
       return articles.sort((a,b) => {
         return a.comment_count - b.comment_count;
@@ -38,12 +38,12 @@ const GetArticlesByPeriod = async (start, end, res) => {
     {
         [Op.and]: [
             {
-                'publish_date': {
+                'createdAt': {
                     [Op.gte]: start
                 },
             },
             {
-                'publish_date': {
+                'createdAt': {
                     [Op.lte]: end
                 }
             }

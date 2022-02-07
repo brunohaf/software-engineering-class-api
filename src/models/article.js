@@ -9,12 +9,9 @@ module.exports = (sequelize, type) => {
         id_theme: type.INTEGER,
         content: type.STRING,
         star_score: type.INTEGER,
-        publish_date: type.DATE,
-        update_date: type.DATE,
         comment_count: type.INTEGER
         },
         {
             timestamps: false
         }
-        
 )};

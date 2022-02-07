@@ -1,10 +1,11 @@
 const { User } = require('../models/sequelize')
 const password_service = require('./password-services');
+const password_cipher = password_service.cipher('A Subversão da Magia')
 
 const SaveUser = (req, res) => {
-    let pass = password_service.cipher(req.password);
-    User.create( {   name : req.name,
-                     id_user : req.email,
+    let pass = password_cipher(req.password);
+    User.create( {  name : req.name,
+                     id_user : req.login_email,
                      password: pass
                 }).then( response =>{
                     return res.status( 200 ).json("Success!");
@@ -14,28 +15,19 @@ const SaveUser = (req, res) => {
                 });
 };
 
-const Login = (req, res) => {
-    await GetUserById(req.email).then(User => {
-        return res.status( 200 ).json(ValidatePassword(User, req.password));
-    } ).catch( error => {
-        return res.status( 400 ).send( "Fetching has failed from the origin:\t" + error.errors[0].origin +
-        "\nError Message:\t" + error.errors[0].message )
-      });
-};
-
 const ValidatePassword = (user, passwordCandidate) => {
-    let pass = password_service.cipher(passwordCandidate);
+    let pass = password_cipher(passwordCandidate);
     return user.password == pass;
 }
 
 const UpdateUser = (req, res) => {
-    let pass = password_service.cipher(req.password);
+    let pass = password_cipher(req.password);
     User.update( {   name : req.name,
-                     id_user : req.email,
+                     id_user : req.id_user,
                      password: pass
                 },
                 {
-                    where: {idUsere: req.idUsere}
+                    where: {id_user: req.id_user}
                 }).then( response =>{
                     return res.status( 200 ).json("Success!");
                 }).catch( error => {
@@ -72,6 +64,21 @@ const DeleteUser = async (req,res) => {
         "\nError Message:\t" + error.errors[0].message )
       });
 }
+
+const Login = async (req, res) => {
+    await User.findByPk(req.login).then(User => {
+        let isValidPass = ValidatePassword(User, req.password);
+        if(isValidPass){
+            return res.status( 200 ).json("User successfully authenticated!");
+        }
+
+        return res.status( 401 ).send("User login or password do not match!")
+        
+    } ).catch( error => {
+        return res.status( 400 ).send( "Fetching has failed from the origin:\t" + error.errors[0].origin +
+        "\nError Message:\t" + error.errors[0].message )
+      });
+};
 
 module.exports = { SaveUser,
     UpdateUser,

@@ -18,3 +18,8 @@ const decipher = salt => {
       .map(charCode => String.fromCharCode(charCode))
       .join('');
 }
+
+module.exports = { 
+  cipher,
+  decipher,
+};
