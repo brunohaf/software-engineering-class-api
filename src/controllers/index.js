@@ -4,9 +4,11 @@ const router = require('express').Router();
 router.use('/article', require('./article-controller'));
 router.use('/articles', require('./article-controller'));
 router.use('/article/id', require('./article-controller'));
+router.use('/articles-op', require('./article-operations-controller'));
 router.use('/articles-op/top-five', require('./article-operations-controller'));
+router.use('/articles-op/articles/', require('./article-operations-controller'));
 router.use('/articles-op/trending', require('./article-operations-controller'));
-router.use('/articles-op/comments/article-id', require('./article-operations-controller'));
+router.use('/articles-op/comments/', require('./article-operations-controller'));
 
 //ArticleTheme CRUD EndPoints
 router.use('/article-theme', require('./article-theme-controller'));

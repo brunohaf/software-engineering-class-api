@@ -8,9 +8,14 @@ const router = require('express').Router();
  * /articles-op/trending:
  *   get:
  *     tags:
- *     - "Article"
+ *     - "ArticleOperations"
  *     summary: "Get Trending Articles on the database"
  *     description: "Get Trending Articles on the database"
+ *     parameters:
+*     - in: "query"
+ *       name: "trend_count"
+ *       description: "'trend_count' is obligatory to get the trending topics"
+ *       required: true
  *     responses:
  *       200:
  *         description: "The Articles were found!"
@@ -20,7 +25,7 @@ const router = require('express').Router();
  *         description: "Ops... something REALLY wrong happened"
  */
  router.get('/trending', async (req, res) => {
-    return article_op_service.GetTrendingArticles(res);
+    return article_op_service.GetTrendingArticles(req.query.trend_count, res);
 });
 
 /**
@@ -28,7 +33,7 @@ const router = require('express').Router();
  * /articles-op/top-five:
  *   get:
  *     tags:
- *     - "Article"
+ *     - "ArticleOperations"
  *     summary: "Get Top 5 Articles on the database"
  *     description: "Get Top 5 Articles on the database"
  *     responses:
@@ -44,12 +49,17 @@ const router = require('express').Router();
 });
 /**
  *  @swagger
- * /articles-op/articles/theme:
+ * /articles-op/articles/:
  *   get:
  *     tags:
- *     - "Article"
+ *     - "ArticleOperations"
  *     summary: "Get All Articles on the database from the given Theme"
  *     description: "Get All Articles on the database from the given Theme"
+ *     parameters:
+*     - in: "query"
+ *       name: "id_theme"
+ *       description: "'id_theme' is obligatory to get the comments of an article"
+ *       required: true
  *     responses:
  *       200:
  *         description: "The Articles were found!"
@@ -58,28 +68,33 @@ const router = require('express').Router();
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/articles/theme', async (req, res) => {
-    return article_theme_service.GetArticlesByTheme(req, res);
+ router.get('/articles/', async (req, res) => {
+    return article_theme_service.GetArticlesByTheme(req.query.id_theme, res);
 });
 
 /**
  *  @swagger
- * /articles-op/comments/article-id:
+ * /articles-op/comments/:
  *   get:
  *     tags:
- *     - "Article"
- *     summary: "Get All Articles on the database from the given Theme"
- *     description: "Get All Articles on the database from the given Theme"
+ *     - "ArticleOperations"
+ *     summary: "Get All Comments on the database from the given Article"
+ *     description: "Get All Comments on the database from the given Article"
+ *     parameters:
+*     - in: "query"
+ *       name: "id_article"
+ *       description: "'id_article' is obligatory to get the comments of an article"
+ *       required: true
  *     responses:
  *       200:
- *         description: "The Articles were found!"
+ *         description: "The Comments were found!"
  *       401:
- *         description: "Articles were not found'"
+ *         description: "Comments were not found'"
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/comments/article-id', async (req, res) => {
-    return article_comments_service.GetAllCommentsByArticleId(req, res);
+ router.get('/comments/', async (req, res) => {
+    return article_comments_service.GetAllCommentsByArticleId(req.query.id_article, res);
 });
 
 

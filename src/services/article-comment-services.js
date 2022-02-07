@@ -62,7 +62,7 @@ const GetAllCommentsByArticleId = async (req, res) => {
     return await GetAllCommentsByCondition
     (
         {
-            where: {id_article: req.id_article}
+            where: {id_article: req}
         },
         res
     )

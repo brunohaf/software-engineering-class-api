@@ -59,10 +59,10 @@ const DeleteArticleTheme = async (req,res) => {
 
 const GetArticlesByTheme = async (req, res) => {
     const condition = {
-        id_theme: req.id_theme
+        id_theme: req
     }
-    Article.belongsTo(ArticleTheme, { foreignKey: 'id_article' });
-    ArticleTheme.hasMany(Article, { foreignKey: 'id_article' }, { targetKey: 'id_article' });
+    Article.belongsTo(ArticleTheme, { foreignKey: 'id_theme' });
+    ArticleTheme.hasMany(Article, { foreignKey: 'id_theme' }, { targetKey: 'id_theme' });
 
      await ArticleTheme.findAll({
         include: [{
@@ -71,7 +71,7 @@ const GetArticlesByTheme = async (req, res) => {
         }],
         where: [condition]
     }).then(response => {
-        return res.status(200).json(response.map(c => c.article_web));
+        return res.status(200).json(response.map(c => c.dataValues.article_webs));
     }).catch(error => {
         return res.status(400).send("Fetching has failed: \t" + error)
     });

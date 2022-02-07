@@ -3,7 +3,7 @@ const article_service = require('./article-services');
 
 const GetTrendingArticles = async (req, res) => {
     await Article.findAll().then( articles => {
-        return res.status( 200 ).json(FilterTrendingArticles(articles, req.trend_count))
+        return res.status( 200 ).json(FilterTrendingArticles(articles, req))
       })
       .catch( error => {
         return res.status( 400 ).send( "Fetching has failed:\t" + error)
@@ -20,12 +20,13 @@ const FilterTrendingArticles = (articles, trendCount) => {
 }
 
 const GetTopFiveArticles = async (res) => {
-    await article_service.GetAllArticles().then( articles => {
-        return res.status( 200 ).json(FilterTopFiveArticles(articles))
-      })
-      .catch( error => {
-        return res.status( 400 ).send( "Fetching has failed:\t" + error)
-      });
+    await Article.findAll()
+    .then( articles => {
+      return res.status( 200 ).json( FilterTopFiveArticles(articles) )
+    })
+    .catch( error => {
+      return res.status( 400 ).send( "Fetching has failed:\t" + error)
+    });
 }
 
 const FilterTopFiveArticles = (articles) => {

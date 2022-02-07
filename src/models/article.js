@@ -13,6 +13,6 @@ module.exports = (sequelize, type) => {
         comment_count: type.INTEGER
         },
         {
-            timestamps: false
+            timestamps: true
         }
 )};
