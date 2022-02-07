@@ -1,8 +1,8 @@
-const { ArticleComment} = require('../models/sequelize')
+const { ArticleComment, Article } = require('../models/sequelize')
 const article_service = require('./article-services');
 
-const SaveArticleComment = (req, res) => {
-    ArticleComment.create( {  
+const SaveArticleComment = async (req, res) => {
+     ArticleComment.create(  {  
                             id_user: req.id_user,
                             id_article: req.id_article,
                             content: req.content,
@@ -14,11 +14,16 @@ const SaveArticleComment = (req, res) => {
                 });
 }
 
-const UpdateArticleCommentCount = (articleId, value) => {
-    let article = article_service.GetArticleById(articleId);
-    article.comment_count = article.comment_count+value
-    article_service.UpdateArticle(article)
+const UpdateArticleCommentCount = async (articleId, value) => {
+    const res = {};
+    res.status = () => res;
+    res.json = () => res;
+    await Article.findByPk(articleId).then(article => {
+        article.comment_count = article.comment_count+value
+        article_service.UpdateArticle(article, res)
+    }).catch(error => {return error});
 }
+
 
 const UpdateArticleComment = (req, res) => {
     ArticleComment.update( {  
@@ -63,6 +68,16 @@ const GetAllCommentsByArticleId = async (req, res) => {
     )
 }
 
+const GetAllComments = async (res) => {
+    await ArticleComment.findAll()
+    .then( articleComments => {
+      return res.status( 200 ).json( articleComments )
+    })
+    .catch( error => {
+      return res.status( 400 ).send( "Fetching has failed:\t" + error)
+    });
+}
+
 const GetAllCommentsByUserId = async (req, res) => {
     return await GetAllCommentsByCondition
     (
@@ -74,12 +89,19 @@ const GetAllCommentsByUserId = async (req, res) => {
 }
 
 const DeleteArticleComment = async (req,res) => {
-    await ArticleComment.destroy({where: {id_comment: req}}).then(articleComment => {
-        UpdateArticleCommentCount(req, -1)
-        return res.status( 200 ).json("Success!");
-    } ).catch( error => {
-        return res.status( 400 ).send( "Delete has failed:\t" + error )
+    let articleId = ""
+    await ArticleComment.findByPk(req).then(articleComment => {
+        articleId = articleComment.id_article;
+    }).catch( error => {
+        return  error
       });
+
+    await ArticleComment.destroy({where: {id_comment: req}}).then(articleComment => {
+        UpdateArticleCommentCount(articleId, -1)
+        return res.status( 200 ).json("Success!");
+    }).catch( error => {
+        return res.status( 400 ).send( "Delete has failed:\t" + error )
+    });
 }
 
 
@@ -89,5 +111,6 @@ module.exports = {
     GetArticleCommentById,
     GetAllCommentsByArticleId,
     GetAllCommentsByUserId,
+    GetAllComments,
     DeleteArticleComment
 };

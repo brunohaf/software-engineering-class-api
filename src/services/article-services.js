@@ -4,9 +4,8 @@ const SaveArticle = (req, res) => {
     Article.create( {  
                         id_author : req.id_author,
                         id_theme: req.id_theme,
+                        title: req.title,
                         content : req.content,
-                        publish_date : new Date(req.dt_inicio_reserva).toISOString(),
-                        update_date : new Date(req.dt_fim_reserva).toISOString(),
                         star_score: !!req.star_score ? req.star_score : 0,
                         comment_count: !!req.comment_count ? req.comment_count : 0,
             }).then( response =>{
@@ -21,9 +20,8 @@ const UpdateArticle = (req, res) => {
                     id_author : req.id_author,
                     id_theme: req.id_theme,
                     content : req.content,
-                    publish_date : new Date(req.dt_inicio_reserva).toISOString(),
-                    update_date : new Date(req.dt_fim_reserva).toISOString(),
                     star_score: req.star_score,
+                    title: req.title,
                     comment_count: req.comment_count,
                 },
                 {
@@ -32,11 +30,10 @@ const UpdateArticle = (req, res) => {
                     return res.status( 200 ).json("Success!");
                 }).catch( error => {
                     return res.status( 400 ).send( "Update has an error: \t" + error )
-                });;
+                });
 }
 
 const GetArticleById = async (req,res) => {
-
     await Article.findByPk(req).then(article => {
         return res.status( 200 ).json(article.dataValues);
     } ).catch( error => {

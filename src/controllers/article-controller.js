@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 /**
  *  @swagger
- * /SaveArticle:
+ * /article:
  *   post:
  *     tags:
  *     - "Article"
@@ -22,14 +22,12 @@ const router = require('express').Router();
  *              type: "integer"
  *           id_theme:
  *              type: "integer"
+ *           title:
+ *              type: "string"
  *           content:
  *              type: "string"
  *           star_score:
  *              type: "integer"
-  *           publish_date:
- *              type: "date"
- *           update_date:
- *              type: "date"
  *           comment_count:
  *              type: "integer"
  *     responses:
@@ -48,7 +46,7 @@ router.post('/', async (req, res) => {
 
 /**
  *  @swagger
- * /UpdateArticle:
+ * /article:
  *   put:
  *     tags:
  *     - "Article"
@@ -62,18 +60,18 @@ router.post('/', async (req, res) => {
  *       schema:
 *         type: "article_web"
  *         properties:
+ *           id_article:
+ *              type: "integer"
  *           id_author:
  *              type: "integer"
  *           id_theme:
  *              type: "integer"
+ *           title:
+ *              type: "string"
  *           content:
  *              type: "string"
  *           star_score:
  *              type: "integer"
- *           publish_date:
- *              type: "date"
- *           update_date:
- *              type: "date"
  *           comment_count:
  *              type: "integer"
  *     responses:
@@ -90,7 +88,7 @@ router.put('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetAllArticles:
+ * /articles:
  *   get:
  *     tags:
  *     - "Article"
@@ -110,14 +108,14 @@ router.get('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetArticle/byId:
+ * /article/id:
  *   get:
  *     tags:
  *     - "Article"
  *     summary: "Find a Article on the database"
  *     description: "Find a Article on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_article"
  *       description: "'id_article' is obligatory to update a Article"
  *       required: true
@@ -129,60 +127,20 @@ router.get('/', async (req, res) => {
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
-router.get('/byId', async (req, res) => {
-    return article_service.GetArticleById(req.header('id_article'),res);
+router.get('/id', async (req, res) => {
+    return article_service.GetArticleById(req.query.id_article,res);
 });
 
 /**
  *  @swagger
- * /GetTrendingArticles:
- *   get:
- *     tags:
- *     - "Article"
- *     summary: "Get Trending Articles on the database"
- *     description: "Get Trending Articles on the database"
- *     responses:
- *       200:
- *         description: "The Articles were found!"
- *       401:
- *         description: "Articles were not found'"
- *       500:
- *         description: "Ops... something REALLY wrong happened"
- */
- router.get('/', async (req, res) => {
-    return article_op_service.GetTrendingArticles(res);
-});
-
-/**
- *  @swagger
- * /GetTopFiveArticles:
- *   get:
- *     tags:
- *     - "Article"
- *     summary: "Get Top 5 Articles on the database"
- *     description: "Get Top 5 Articles on the database"
- *     responses:
- *       200:
- *         description: "The Articles were found!"
- *       401:
- *         description: "Articles were not found'"
- *       500:
- *         description: "Ops... something REALLY wrong happened"
- */
- router.get('/', async (req, res) => {
-    return article_op_service.GetTopFiveArticles(res);
-});
-
-/**
- *  @swagger
- * /DeleteArticle:
+ * /article:
  *   delete:
  *     tags:
  *     - "Article"
  *     summary: "Erase a Article from the database"
  *     description: "Erase a Article on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_article"
  *       description: "'id_article' is obligatory to erase a Article"
  *       required: true
@@ -195,7 +153,7 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    return article_service.DeleteArticle(req.header('id_article'),res);
+    return article_service.DeleteArticle(req.query.id_article,res);
 });
 
 module.exports = router;

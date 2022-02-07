@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 /**
  *  @swagger
- * /SaveArticleTheme:
+ * /article-theme:
  *   post:
  *     tags:
  *     - "ArticleTheme"
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 
 /**
  *  @swagger
- * /UpdateArticleTheme:
+ * /article-theme:
  *   put:
  *     tags:
  *     - "ArticleTheme"
@@ -73,7 +73,7 @@ router.put('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetAllArticleThemes:
+ * /article-themes:
  *   get:
  *     tags:
  *     - "ArticleTheme"
@@ -93,14 +93,14 @@ router.get('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetArticleTheme/byId:
+ * /article-theme/id:
  *   get:
  *     tags:
  *     - "ArticleTheme"
  *     summary: "Find a ArticleTheme on the database"
  *     description: "Find a ArticleTheme on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_theme"
  *       description: "'id_theme' is obligatory to update a ArticleTheme"
  *       required: true
@@ -112,20 +112,20 @@ router.get('/', async (req, res) => {
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
-router.get('/byId', async (req, res) => {
-    return article_theme_service.GetArticleThemeById(req.header('id_theme'),res);
+router.get('/id', async (req, res) => {
+    return article_theme_service.GetArticleThemeById(req.query.id_theme,res);
 });
 
 /**
  *  @swagger
- * /DeleteArticleTheme:
+ * /article-theme:
  *   delete:
  *     tags:
  *     - "ArticleTheme"
  *     summary: "Erase a ArticleTheme from the database"
  *     description: "Erase a ArticleTheme on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_theme"
  *       description: "'id_theme' is obligatory to erase a ArticleTheme"
  *       required: true
@@ -138,7 +138,7 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    return article_theme_service.DeleteArticleTheme(req.header('id_theme'),res);
+    return article_theme_service.DeleteArticleTheme(req.query.id_theme,res);
 });
 
 module.exports = router;

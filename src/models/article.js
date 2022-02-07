@@ -9,6 +9,7 @@ module.exports = (sequelize, type) => {
         id_theme: type.INTEGER,
         content: type.STRING,
         star_score: type.INTEGER,
+        title: type.STRING,
         comment_count: type.INTEGER
         },
         {

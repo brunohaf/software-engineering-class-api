@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 /**
  *  @swagger
- * /GetTrendingArticles:
+ * /articles-op/trending:
  *   get:
  *     tags:
  *     - "Article"
@@ -19,13 +19,13 @@ const router = require('express').Router();
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/', async (req, res) => {
+ router.get('/trending', async (req, res) => {
     return article_op_service.GetTrendingArticles(res);
 });
 
 /**
  *  @swagger
- * /GetTopFiveArticles:
+ * /articles-op/top-five:
  *   get:
  *     tags:
  *     - "Article"
@@ -39,13 +39,12 @@ const router = require('express').Router();
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/', async (req, res) => {
+ router.get('/top-five', async (req, res) => {
     return article_op_service.GetTopFiveArticles(res);
 });
-
 /**
  *  @swagger
- * /GetArticlesByTheme:
+ * /articles-op/articles/theme:
  *   get:
  *     tags:
  *     - "Article"
@@ -59,13 +58,13 @@ const router = require('express').Router();
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/', async (req, res) => {
+ router.get('/articles/theme', async (req, res) => {
     return article_theme_service.GetArticlesByTheme(req, res);
 });
 
 /**
  *  @swagger
- * /GetAllCommentsByArticleId:
+ * /articles-op/comments/article-id:
  *   get:
  *     tags:
  *     - "Article"
@@ -79,7 +78,7 @@ const router = require('express').Router();
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
- router.get('/', async (req, res) => {
+ router.get('/comments/article-id', async (req, res) => {
     return article_comments_service.GetAllCommentsByArticleId(req, res);
 });
 

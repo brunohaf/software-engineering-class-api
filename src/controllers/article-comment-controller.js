@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 /**
  *  @swagger
- * /SaveArticleComment:
+ * /article-comment:
  *   post:
  *     tags:
  *     - "ArticleComment"
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 
 /**
  *  @swagger
- * /UpdateArticleComment:
+ * /article-comment:
  *   put:
  *     tags:
  *     - "ArticleComment"
@@ -75,7 +75,7 @@ router.put('/', async (req, res) => {
 
 /**
  *  @swagger
- * /GetAllRentalCompanies:
+ * /article-comments:
  *   get:
  *     tags:
  *     - "ArticleComment"
@@ -90,19 +90,19 @@ router.put('/', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.get('/', async (req, res) => {
-    return  article_comments_service.GetAllRentalCompanies(res);
+    return  article_comments_service.GetAllComments(res);
 });
 
 /**
  *  @swagger
- * /GetArticleComment/byId:
+ * /article-comment/id:
  *   get:
  *     tags:
  *     - "ArticleComment"
  *     summary: "Find a ArticleComment on the database"
  *     description: "Find a ArticleComment on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_comment"
  *       description: "'id_comment' is obligatory to update a ArticleComment"
  *       required: true
@@ -114,20 +114,20 @@ router.get('/', async (req, res) => {
  *       500:
  *         description: "Ops... something REALLY wrong happened"
  */
-router.get('/byId', async (req, res) => {
-    return article_comments_service.GetArticleCommentById(req.header('id_comment'),res);
+router.get('/id', async (req, res) => {
+    return article_comments_service.GetArticleCommentById(req.query.id_comment,res);
 });
 
 /**
  *  @swagger
- * /DeleteArticleComment:
+ * /article-comment:
  *   delete:
  *     tags:
  *     - "ArticleComment"
  *     summary: "Erase a ArticleComment from the database"
  *     description: "Erase a ArticleComment on the database"
  *     parameters:
-*     - in: "header"
+*     - in: "query"
  *       name: "id_comment"
  *       description: "'id_comment' is obligatory to erase a ArticleComment"
  *       required: true
@@ -140,7 +140,7 @@ router.get('/byId', async (req, res) => {
  *         description: "Ops... something REALLY wrong happened"
  */
 router.delete('/', async (req, res) => {
-    return article_comments_service.DeleteArticleComment(req.header('id_comment'),res);
+    return article_comments_service.DeleteArticleComment(req.query.id_comment,res);
 });
 
 module.exports = router;

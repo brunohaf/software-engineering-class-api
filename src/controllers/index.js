@@ -1,38 +1,25 @@
 const router = require('express').Router();
 
 //Usability EndPoints
-router.use('/GetTrendingArticles', require('./article-operations-controller'));
-router.use('/GetTopFiveArticles', require('./article-operations-controller'));
-router.use('/GetArticlesByTheme', require('./article-operations-controller'));
-router.use('/GetAllCommentsByArticleId', require('./article-operations-controller'));
-
-//Article CRUD EndPoints
-router.use('/SaveArticle', require('./article-controller'));
-router.use('/UpdateArticle', require('./article-controller'));
-router.use('/GetArticle', require('./article-controller'));
-router.use('/GetAllArticles', require('./article-controller'));
-router.use('/DeleteArticle', require('./article-controller'));
+router.use('/article', require('./article-controller'));
+router.use('/articles', require('./article-controller'));
+router.use('/article/id', require('./article-controller'));
+router.use('/articles-op/top-five', require('./article-operations-controller'));
+router.use('/articles-op/trending', require('./article-operations-controller'));
+router.use('/articles-op/comments/article-id', require('./article-operations-controller'));
 
 //ArticleTheme CRUD EndPoints
-router.use('/SaveArticleTheme', require('./article-theme-controller'));
-router.use('/UpdateArticleTheme', require('./article-theme-controller'));
-router.use('/GetArticleTheme', require('./article-theme-controller'));
-router.use('/GetAllArticleThemes', require('./article-theme-controller'));
-router.use('/DeleteArticleTheme', require('./article-theme-controller'));
+router.use('/article-theme', require('./article-theme-controller'));
+router.use('/article-themes', require('./article-theme-controller'));
+router.use('/article-theme/id', require('./article-theme-controller'));
 
 //ArticleComment CRUD EndPoints
-router.use('/SaveArticleComment', require('./article-comment-controller'));
-router.use('/UpdateArticleComment', require('./article-comment-controller'));
-router.use('/GetArticleComment', require('./article-comment-controller'));
-router.use('/GetAllRentalCompanies', require('./article-comment-controller'));
-router.use('/DeleteArticleComment', require('./article-comment-controller'));
+router.use('/article-comment', require('./article-comment-controller'));
+router.use('/article-comments', require('./article-comment-controller'));
+router.use('/article-comment/id', require('./article-comment-controller'));
 
 //User CRUD EndPoints
 router.use('/user', require('./user-controller'));
-//router.use('/UpdateUser', require('./user-controller'));
-//router.use('/GetUser', require('./user-controller'));
-//router.use('/GetAllUsers', require('./user-controller'));
-//router.use('/DeleteUser', require('./user-controller'));
 router.use('/user/id', require('./user-controller'));
 router.use('/user/login', require('./user-controller'));
 router.use('/users', require('./user-controller'));
